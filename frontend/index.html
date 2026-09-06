@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="header">
+        <h1>Student Management System</h1>
+
+        <button type="button" onclick="logout()" class="logout-btn">
+            Logout
+        </button>
+    </header>
+
+
+    <main class="container">
+
+        <!-- ================= DASHBOARD ================= -->
+        <section class="dashboard">
+
+            <div class="dashboard-card">
+
+                <div class="card-icon">
+                    👨‍🎓
+                </div>
+
+                <div class="card-content">
+                    <h3>Total Students</h3>
+                    <p id="totalStudents">0</p>
+                    <span>Registered Students</span>
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <div class="card-icon">
+                    📚
+                </div>
+
+                <div class="card-content">
+                    <h3>Total Courses</h3>
+                    <p id="totalCourses">0</p>
+                    <span>Available Courses</span>
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <div class="card-icon">
+                    🎓
+                </div>
+
+                <div class="card-content">
+                    <h3>Total Years</h3>
+                    <p id="totalYears">0</p>
+                    <span>Academic Years</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ADD STUDENT ================= -->
+        <section id="studentFormContainer" class="form-container">
+
+            <div class="section-header">
+                <h2>Add Student</h2>
+            </div>
+
+            <form id="studentForm">
+
+                <div class="form-group">
+                    <label for="name">Name</label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter student name"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter email"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+
+                    <input
+                        type="text"
+                        id="phone"
+                        placeholder="Enter 10-digit phone number"
+                        maxlength="10"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="course">Course</label>
+
+                    <input
+                        type="text"
+                        id="course"
+                        placeholder="Enter course"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="year">Year</label>
+
+                    <select id="year" required>
+                        <option value="">Select Year</option>
+                        <option value="1">1st Year</option>
+                        <option value="2">2nd Year</option>
+                        <option value="3">3rd Year</option>
+                        <option value="4">4th Year</option>
+                    </select>
+                </div>
+
+
+                <div class="form-button-container">
+
+                    <button
+                        type="submit"
+                        class="add-student-btn"
+                    >
+                        + Add Student
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- ================= EDIT STUDENT ================= -->
+        <section
+            id="editFormContainer"
+            class="form-container"
+            style="display: none;"
+        >
+
+            <div class="section-header">
+                <h2>Edit Student</h2>
+            </div>
+
+
+            <form id="editStudentForm">
+
+                <!-- Hidden Student ID -->
+                <input
+                    type="hidden"
+                    id="editId"
+                >
+
+
+                <div class="form-group">
+
+                    <label for="editName">
+                        Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editName"
+                        placeholder="Enter student name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="editEmail">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="editEmail"
+                        placeholder="Enter email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="editPhone">
+                        Phone
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editPhone"
+                        placeholder="Enter 10-digit phone number"
+                        maxlength="10"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="editCourse">
+                        Course
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editCourse"
+                        placeholder="Enter course"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="editYear">
+                        Year
+                    </label>
+
+                    <select id="editYear" required>
+
+                        <option value="">
+                            Select Year
+                        </option>
+
+                        <option value="1">
+                            1st Year
+                        </option>
+
+                        <option value="2">
+                            2nd Year
+                        </option>
+
+                        <option value="3">
+                            3rd Year
+                        </option>
+
+                        <option value="4">
+                            4th Year
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-button-container">
+
+                    <button
+                        type="submit"
+                        class="update-btn"
+                    >
+                        Update Student
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="cancel-btn"
+                        onclick="cancelEdit()"
+                    >
+                        Cancel
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- ================= SEARCH & FILTER ================= -->
+        <section class="filter-container">
+
+            <div class="section-header">
+                <h2>Student Records</h2>
+            </div>
+
+
+            <div class="filter-controls">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search student..."
+                >
+
+
+                <select id="courseFilter">
+
+                    <option value="">
+                        All Courses
+                    </option>
+
+                </select>
+
+
+                <select id="yearFilter">
+
+                    <option value="">
+                        All Years
+                    </option>
+
+                    <option value="1">
+                        1st Year
+                    </option>
+
+                    <option value="2">
+                        2nd Year
+                    </option>
+
+                    <option value="3">
+                        3rd Year
+                    </option>
+
+                    <option value="4">
+                        4th Year
+                    </option>
+
+                </select>
+
+
+                <!-- IMPORTANT: values match script.js -->
+
+                <select id="sortFilter">
+
+                    <option value="">
+                        Sort By
+                    </option>
+
+                    <option value="idAsc">
+                        ID ↑
+                    </option>
+
+                    <option value="idDesc">
+                        ID ↓
+                    </option>
+
+                    <option value="nameAsc">
+                        Name A-Z
+                    </option>
+
+                    <option value="nameDesc">
+                        Name Z-A
+                    </option>
+
+                    <option value="yearAsc">
+                        Year ↑
+                    </option>
+
+                    <option value="yearDesc">
+                        Year ↓
+                    </option>
+
+                    <option value="courseAsc">
+                        Course A-Z
+                    </option>
+
+                    <option value="courseDesc">
+                        Course Z-A
+                    </option>
+
+                </select>
+
+
+                <button
+                    type="button"
+                    onclick="clearFilters()"
+                    class="clear-btn"
+                >
+                    Clear
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= STUDENT TABLE ================= -->
+        <section class="table-container">
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Name</th>
+
+                            <th>Email</th>
+
+                            <th>Phone</th>
+
+                            <th>Course</th>
+
+                            <th>Year</th>
+
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="studentsList">
+
+                        <!-- Students will be loaded by JavaScript -->
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- ================= PAGINATION ================= -->
+
+            <div class="pagination">
+
+                <button
+                    type="button"
+                    id="prevPage"
+                    onclick="previousPage()"
+                >
+                    ← Previous
+                </button>
+
+
+                <span id="pageInfo">
+                    Page 1 of 1
+                </span>
+
+
+                <button
+                    type="button"
+                    id="nextPage"
+                    onclick="nextPage()"
+                >
+                    Next →
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= STUDENT DETAILS MODAL ================= -->
+
+    <div
+        id="studentModal"
+        class="modal"
+        style="display: none;"
+    >
+
+        <div class="modal-content">
+
+            <button
+                type="button"
+                class="modal-close"
+                onclick="closeStudentModal()"
+            >
+                ×
+            </button>
+
+
+            <h2>Student Details</h2>
+
+
+            <div class="student-details">
+
+                <p>
+                    <strong>ID:</strong>
+                    <span id="viewId"></span>
+                </p>
+
+
+                <p>
+                    <strong>Name:</strong>
+                    <span id="viewName"></span>
+                </p>
+
+
+                <p>
+                    <strong>Email:</strong>
+                    <span id="viewEmail"></span>
+                </p>
+
+
+                <p>
+                    <strong>Phone:</strong>
+                    <span id="viewPhone"></span>
+                </p>
+
+
+                <p>
+                    <strong>Course:</strong>
+                    <span id="viewCourse"></span>
+                </p>
+
+
+                <p>
+                    <strong>Year:</strong>
+                    <span id="viewYear"></span>
+                </p>
+
+
+                <p>
+                    <strong>Created At:</strong>
+                    <span id="viewCreatedAt"></span>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script src="script.js"></script>
+
+</body>
+</html>

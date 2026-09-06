@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Student Management System - Login</title>
+
+    <link rel="stylesheet" href="login.css">
+
+</head>
+
+
+<body>
+
+    <div class="login-container">
+
+        <div class="login-card">
+
+            <h1>Student Management System</h1>
+
+            <h2>Login</h2>
+
+
+            <!-- ========================================
+                 LOGIN FORM
+                 ======================================== -->
+
+            <form id="loginForm">
+
+
+                <!-- Email or Phone -->
+
+                <input
+                    type="text"
+                    id="identifier"
+                    placeholder="Email or Phone Number"
+                    autocomplete="username"
+                    required
+                >
+
+
+                <!-- Password -->
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Password"
+                    autocomplete="current-password"
+                    required
+                >
+
+
+                <!-- Remember Me -->
+
+                <label class="remember-me">
+
+                    <input
+                        type="checkbox"
+                        id="rememberMe"
+                    >
+
+                    <span>Remember Me</span>
+
+                </label>
+
+
+                <!-- Login Button -->
+
+                <button type="submit">
+                    Login
+                </button>
+
+
+                <!-- Forgot Password -->
+
+                <button
+                    type="button"
+                    class="forgot-password"
+                    onclick="forgotPassword()"
+                >
+                    Forgot Password?
+                </button>
+
+
+                <!-- Login Message -->
+
+                <p id="loginMessage"></p>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ========================================
+         RESET PASSWORD MODAL
+         ======================================== -->
+
+    <div
+        id="resetPasswordModal"
+        class="reset-modal"
+    >
+
+        <div class="reset-card">
+
+
+            <!-- Close Button -->
+
+            <button
+                type="button"
+                class="close-reset"
+                onclick="closeResetPassword()"
+            >
+                &times;
+            </button>
+
+
+            <h2>Reset Password</h2>
+
+
+            <p class="reset-subtitle">
+                Enter your details to reset your password.
+            </p>
+
+
+            <form id="resetPasswordForm">
+
+
+                <!-- Username -->
+
+                <input
+                    type="text"
+                    id="resetUsername"
+                    placeholder="Username"
+                    required
+                >
+
+
+                <!-- New Password -->
+
+                <input
+                    type="password"
+                    id="newPassword"
+                    placeholder="New Password"
+                    required
+                >
+
+
+                <!-- Confirm Password -->
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Confirm New Password"
+                    required
+                >
+
+
+                <!-- Reset Button -->
+
+                <button
+                    type="submit"
+                    class="reset-btn"
+                >
+                    Reset Password
+                </button>
+
+
+                <!-- Cancel -->
+
+                <button
+                    type="button"
+                    class="cancel-reset"
+                    onclick="closeResetPassword()"
+                >
+                    Cancel
+                </button>
+
+
+                <!-- Reset Message -->
+
+                <p id="resetMessage"></p>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ========================================
+         JAVASCRIPT
+         ======================================== -->
+
+    <script src="login.js"></script>
+
+</body>
+
+</html>

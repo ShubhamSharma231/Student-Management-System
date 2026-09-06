@@ -1,0 +1,499 @@
+/* ===============================
+   GLOBAL
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* ===============================
+   BODY
+================================ */
+
+body {
+    font-family: Arial, sans-serif;
+
+    background: #f2f4f7;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* ===============================
+   LOGIN CONTAINER
+================================ */
+
+.login-container {
+    width: 100%;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+}
+
+
+/* ===============================
+   LOGIN CARD
+================================ */
+
+.login-card {
+    width: 100%;
+
+    max-width: 420px;
+
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.12);
+
+    text-align: center;
+}
+
+
+/* ===============================
+   TITLE
+================================ */
+
+.login-card h1 {
+    font-size: 26px;
+
+    color: #222;
+
+    margin-bottom: 10px;
+}
+
+
+/* ===============================
+   LOGIN HEADING
+================================ */
+
+.login-card h2 {
+    font-size: 22px;
+
+    color: #555;
+
+    margin-bottom: 25px;
+}
+
+
+/* ===============================
+   LOGIN FORM
+================================ */
+
+#loginForm {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+
+/* ===============================
+   INPUTS
+================================ */
+
+#loginForm input[type="text"],
+#loginForm input[type="password"] {
+    width: 100%;
+
+    padding: 13px 14px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 7px;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+
+#loginForm input[type="text"]:focus,
+#loginForm input[type="password"]:focus {
+    border-color: #007bff;
+
+    box-shadow:
+        0 0 0 2px rgba(0, 123, 255, 0.1);
+}
+
+
+/* ===============================
+   REMEMBER ME
+================================ */
+
+.remember-me {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 14px;
+
+    color: #555;
+
+    cursor: pointer;
+
+    text-align: left;
+}
+
+
+.remember-me input {
+    width: 16px;
+
+    height: 16px;
+
+    cursor: pointer;
+}
+
+
+/* ===============================
+   LOGIN BUTTON
+================================ */
+
+#loginForm button[type="submit"] {
+    width: 100%;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #007bff;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+#loginForm button[type="submit"]:hover {
+    background: #0056b3;
+}
+
+
+/* ===============================
+   FORGOT PASSWORD
+================================ */
+
+.forgot-password {
+    border: none;
+
+    background: transparent;
+
+    color: #007bff;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    margin-top: -5px;
+}
+
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+
+/* ===============================
+   LOGIN MESSAGE
+================================ */
+
+#loginMessage {
+    min-height: 20px;
+
+    color: #dc3545;
+
+    font-size: 14px;
+}
+
+
+/* ===============================
+   PASSWORD MANAGER ICON
+================================ */
+
+input[type="password"]::-ms-clear {
+    display: none;
+}
+
+
+input[type="password"]::-webkit-credentials-auto-fill-button {
+    visibility: hidden;
+
+    display: none !important;
+}
+
+
+/* ===============================
+   RESET PASSWORD MODAL
+================================ */
+
+.reset-modal {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.5);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 1000;
+}
+
+
+/* ===============================
+   RESET CARD
+================================ */
+
+.reset-card {
+    position: relative;
+
+    width: 100%;
+
+    max-width: 420px;
+
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+
+/* ===============================
+   RESET HEADING
+================================ */
+
+.reset-card h2 {
+    text-align: center;
+
+    color: #222;
+
+    margin-bottom: 8px;
+}
+
+
+.reset-subtitle {
+    text-align: center;
+
+    color: #666;
+
+    font-size: 14px;
+
+    margin-bottom: 22px;
+}
+
+
+/* ===============================
+   CLOSE BUTTON
+================================ */
+
+.close-reset {
+    position: absolute;
+
+    top: 12px;
+
+    right: 15px;
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 28px;
+
+    color: #777;
+
+    cursor: pointer;
+
+    line-height: 1;
+}
+
+
+.close-reset:hover {
+    color: #222;
+}
+
+
+/* ===============================
+   RESET FORM
+================================ */
+
+#resetPasswordForm {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+
+/* ===============================
+   RESET INPUTS
+================================ */
+
+#resetPasswordForm input {
+    width: 100%;
+
+    padding: 13px 14px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 7px;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+
+#resetPasswordForm input:focus {
+    border-color: #007bff;
+
+    box-shadow:
+        0 0 0 2px rgba(0, 123, 255, 0.1);
+}
+
+
+/* ===============================
+   RESET BUTTON
+================================ */
+
+.reset-btn {
+    width: 100%;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #007bff;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.reset-btn:hover {
+    background: #0056b3;
+}
+
+
+/* ===============================
+   CANCEL BUTTON
+================================ */
+
+.cancel-reset {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 7px;
+
+    background: white;
+
+    color: #555;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.cancel-reset:hover {
+    background: #f2f2f2;
+}
+
+
+/* ===============================
+   RESET MESSAGE
+================================ */
+
+#resetMessage {
+    min-height: 20px;
+
+    text-align: center;
+
+    font-size: 14px;
+
+    margin-top: 2px;
+}
+
+
+/* ===============================
+   MOBILE
+================================ */
+
+@media (max-width: 480px) {
+
+    .login-card {
+        padding: 25px 20px;
+    }
+
+
+    .login-card h1 {
+        font-size: 22px;
+    }
+
+
+    .reset-card {
+        padding: 30px 20px;
+    }
+
+}
