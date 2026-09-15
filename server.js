@@ -9,6 +9,7 @@ const cors = require("cors");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
+const rateLimit = require("express-rate-limit");
 
 const db = require("./db");
 
@@ -32,12 +33,29 @@ app.use(express.json());
 const JWT_SECRET = process.env.JWT_SECRET;
 
 if (!JWT_SECRET) {
-
     console.error("JWT_SECRET is missing in .env file.");
-
     process.exit(1);
-
 }
+
+
+// ========================================
+// LOGIN RATE LIMITER
+// ========================================
+
+const loginLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+
+    max: 15,
+
+    standardHeaders: true,
+
+    legacyHeaders: false,
+
+    message: {
+        message:
+            "Too many login attempts. Please try again after 15 minutes."
+    }
+});
 
 
 // ========================================
@@ -103,79 +121,60 @@ app.get("/", (req, res) => {
 // EMAIL OR PHONE + PASSWORD
 // ========================================
 
-app.post("/login", (req, res) => {
+app.post(
+    "/login",
+    loginLimiter,
+    (req, res) => {
 
-    const {
-        identifier,
-        password
-    } = req.body;
-
-
-    if (!identifier || !password) {
-
-        return res.status(400).json({
-            message:
-                "Email/Phone and password are required."
-        });
-
-    }
-
-
-    const sql = `
-        SELECT *
-        FROM users
-        WHERE email = ?
-           OR phone = ?
-        LIMIT 1
-    `;
-
-
-    db.query(
-        sql,
-        [
+        const {
             identifier,
-            identifier
-        ],
-        async (err, results) => {
-
-            if (err) {
-
-                console.error(
-                    "Login database error:",
-                    err
-                );
-
-                return res.status(500).json({
-                    message:
-                        "Database error."
-                });
-
-            }
+            password
+        } = req.body;
 
 
-            if (results.length === 0) {
+        if (!identifier || !password) {
 
-                return res.status(401).json({
-                    message:
-                        "Invalid email/phone or password."
-                });
+            return res.status(400).json({
+                message:
+                    "Email/Phone and password are required."
+            });
 
-            }
-
-
-            const user = results[0];
+        }
 
 
-            try {
+        const sql = `
+            SELECT *
+            FROM users
+            WHERE email = ?
+               OR phone = ?
+            LIMIT 1
+        `;
 
-                const passwordMatch =
-                    await bcrypt.compare(
-                        password,
-                        user.password
+
+        db.query(
+            sql,
+            [
+                identifier,
+                identifier
+            ],
+            async (err, results) => {
+
+                if (err) {
+
+                    console.error(
+                        "Login database error:",
+                        err
                     );
 
+                    return res.status(500).json({
+                        message:
+                            "Database error."
+                    });
 
-                if (!passwordMatch) {
+                }
+
+
+                if (results.length === 0) {
 
                     return res.status(401).json({
                         message:
@@ -185,70 +184,93 @@ app.post("/login", (req, res) => {
                 }
 
 
-                const token = jwt.sign(
-                    {
-                        id: user.id,
-
-                        username:
-                            user.username,
-
-                        email:
-                            user.email,
-
-                        phone:
-                            user.phone
-                    },
-
-                    JWT_SECRET,
-
-                    {
-                        expiresIn: "2h"
-                    }
-                );
+                const user = results[0];
 
 
-                res.json({
+                try {
 
-                    message:
-                        "Login successful!",
+                    const passwordMatch =
+                        await bcrypt.compare(
+                            password,
+                            user.password
+                        );
 
-                    token: token,
 
-                    user: {
+                    if (!passwordMatch) {
 
-                        id: user.id,
-
-                        username:
-                            user.username,
-
-                        email:
-                            user.email,
-
-                        phone:
-                            user.phone
+                        return res.status(401).json({
+                            message:
+                                "Invalid email/phone or password."
+                        });
 
                     }
 
-                });
 
-            } catch (error) {
+                    const token = jwt.sign(
+                        {
+                            id: user.id,
 
-                console.error(
-                    "Authentication error:",
-                    error
-                );
+                            username:
+                                user.username,
 
-                res.status(500).json({
-                    message:
-                        "Authentication error."
-                });
+                            email:
+                                user.email,
+
+                            phone:
+                                user.phone
+                        },
+
+                        JWT_SECRET,
+
+                        {
+                            expiresIn: "2h"
+                        }
+                    );
+
+
+                    res.json({
+
+                        message:
+                            "Login successful!",
+
+                        token: token,
+
+                        user: {
+
+                            id: user.id,
+
+                            username:
+                                user.username,
+
+                            email:
+                                user.email,
+
+                            phone:
+                                user.phone
+
+                        }
+
+                    });
+
+                } catch (error) {
+
+                    console.error(
+                        "Authentication error:",
+                        error
+                    );
+
+                    res.status(500).json({
+                        message:
+                            "Authentication error."
+                    });
+
+                }
 
             }
+        );
 
-        }
-    );
-
-});
+    }
+);
 
 
 // ========================================
